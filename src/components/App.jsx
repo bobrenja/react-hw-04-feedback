@@ -4,20 +4,25 @@ import Statistics from './Statistics/Statistics';
 import FeedbackOptions from './Feedback/FeedbackOptions';
 import css from './App.module.css';
 
+const BTN_GROUP = ['good', 'neutral', 'bad'];
+
 export const App = () => {
-  const [good, setGood] = useState(0);
-  const [neutral, setNeutral] = useState(0);
-  const [bad, setBad] = useState(0);
+  const [state, setState] = useState({
+    good: 0,
+    neutral: 0,
+    bad: 0,
+  });
 
-  const buttonGroup = ['good', 'neutral', 'bad'];
-
-  const changeFeedback = name => {
-    if (name === 'good') setGood(() => good + 1);
-    if (name === 'neutral') setNeutral(() => neutral + 1);
-    if (name === 'bad') setBad(() => bad + 1);
-  };
+  const { good, neutral, bad } = state;
 
   const countTotalFeedback = () => good + neutral + bad;
+
+  const changeFeedback = name => {
+    setState(prevState => {
+      return { ...prevState, [name]: prevState[name] + 1 };
+    });
+  };
+
   const countPositiveFeedbackPercentage = () => {
     const res = (good / countTotalFeedback()) * 100;
     return res ? Number(res.toFixed(1)) : 0;
@@ -26,10 +31,7 @@ export const App = () => {
   return (
     <div className={css.main}>
       <Section title="Feedback caffe Expresso">
-        <FeedbackOptions
-          options={buttonGroup}
-          onLeaveFeedback={changeFeedback}
-        />
+        <FeedbackOptions options={BTN_GROUP} onLeaveFeedback={changeFeedback} />
       </Section>
 
       <Section title="Statistics">
