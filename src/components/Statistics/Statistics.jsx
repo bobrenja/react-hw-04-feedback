@@ -4,11 +4,11 @@ const Statistics = ({ good, neutral, bad, total, positivePercentage }) => {
   return (
     <>
       <ul>
-        <li>good: {good}</li>
-        <li>neutral: {neutral}</li>
-        <li>bad: {bad}</li>
-        <li>Total: {total}</li>
-        <li>Positiv feedback: {positivePercentage}%</li>
+        <li>good:     <span>{good}</span></li>
+        <li>neutral: <span>{neutral}</span></li>
+        <li>bad: <span>{bad}</span></li>
+        <li>Total: <span>{total}</span></li>
+        <li>Positiv feedback: <span>{positivePercentage}</span>%</li>
       </ul>
     </>
   );
